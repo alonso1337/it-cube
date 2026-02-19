@@ -101,6 +101,108 @@ public class Main {
             personY = y;
             step += 1;
         }
+import java.util.Random;
+import java.util.Scanner;
+
+public class Game {
+    public static void main(String[] args) {
+        Random random = new Random();
+        String leftBlock = " | ";
+        String rightBlock = " |";
+        String wall = " + —— + —— + —— + —— + —— + ";
+        int step = 0;//переменные
+        int personX;
+        int personY;
+        int personLive = 3;
+        int sizeBoard = 5;//переменные
+        int difficultGame;
+        personX = sizeBoard / 2;//центр игрового поля
+        personY = sizeBoard / 2;
+        personX = 1 + sizeBoard / 2;//ход персонажа
+        personY = 1 + sizeBoard / 2;
+        String person = "H";
+        String monster = "V";
+        String castle = "C";
+        String gamingField = "+ —— + —— + —— +\n"
+                + "|    |    |    |\n"
+                + "+ —— + —— + —— +\n"
+                + "|    | " + monster + " |    |\n"
+                + "+ —— + —— + —— +\n"
+                + "| " + person + " |    |    |\n"
+                + "+ —— + —— + —— +";
+        String begin = "|    | |";
+        String end = " |    |";
+        String full = begin + monster + end; // |    | Мм |    |
+        String[][] board = new String[sizeBoard][sizeBoard];
+        Scanner scanner = new Scanner(System.in, "UTF-8");
+        System.out.println("Привет! Ты готов начать играть в игру? (Напиши: ДА или НЕТ)");
+        String answer = scanner.nextLine();
+
+        if (answer.equalsIgnoreCase("ДА")) {
+            // первый блок
+            System.out.println("Ехала!");
+            System.out.println("Выбери сложность игры(от 1 до 5):");
+            difficultGame = scanner.nextInt();
+            while (difficultGame < 1 || difficultGame > 5) {
+                if (difficultGame < 1 || difficultGame > 5) {
+                    System.out.println("Некорректный уровень сложности ");
+                    difficultGame = scanner.nextInt();
+                } else break;
+
+            }
+            System.out.println("Выбранная сложность:\t" + difficultGame);
+            int castleX = 1 + random.nextInt(sizeBoard);
+            int castleY = 1 + random.nextInt(sizeBoard);
+            personX = 1 + random.nextInt(sizeBoard);
+            personY = 1 + random.nextInt(sizeBoard);
+
+            System.out.println(castleX);
+            System.out.println(castleY);
+            for (int y = 1; y <= sizeBoard; y++) {
+                System.out.println(wall);
+                for (int x = 1; x <= sizeBoard; x++) {
+                    System.out.print(leftBlock);
+                    if (personY == y && personX == x) {
+                        System.out.print(person);
+                    } else if (castleX == x && castleY == y) {
+                        System.out.print(castle);
+                    } else {
+                        System.out.print("  ");
+                    }
+                }
+                System.out.println(rightBlock);
+                System.out.println(wall);
+            }
+
+            while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
+
+
+
+            }
+
+
+            while (true) {
+                // … логика игры
+                if (personLive <= 0) {
+                    break;
+                }
+            }
+
+
+        } else if (answer.equalsIgnoreCase("НЕТ")) {
+            // второй блок
+            System.out.println("Почему ты не хочешь со мной поиграть?");
+        } else {
+            System.out.println("Есть всего два ответа");
+
+        }
+
+
+    }
+}
+
+
+
         else  {
             System.out.println("корды не изменены");
         }
