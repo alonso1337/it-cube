@@ -2,18 +2,30 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    static boolean taskMonster() {
-        Scanner scanner = new Scanner(System.in, "UTF-8");
-        Random random = new Random();
-        int x = random.nextInt(100);
-        int y = random.nextInt(100);
-        System.out.println("Чему равно" + x + " + " +  y);
-        if (x + y == scanner.nextInt()) {
-            System.out.println("Поздравляю ответ правильный");
-            return true;
-        }else {
-            System.out.println("К сожалению ты проиграл схватку");
-            return false;
+    static boolean taskMonster(int difficultGame) {
+        switch (difficultGame) {
+            case (1):
+                Scanner scanner = new Scanner(System.in, "UTF-8");
+                Random random = new Random();
+                int x = random.nextInt(100);
+                int y = random.nextInt(100);
+                System.out.println("Чему равно" + x + " + " +  y);
+                if (x + y == scanner.nextInt()) {
+                    System.out.println("Поздравляю ответ правильный");
+                    return true;
+                }else {
+                    System.out.println("К сожалению ты проиграл схватку");
+                    return false;
+                }
+                break;
+                case (2):
+                    break;
+                    case (3):
+                        break;
+                        case (4):
+                            break;
+                            case (5):
+                                break;
         }
     }
     public static void main(String[] args) {
@@ -80,33 +92,11 @@ public class Game {
             board[castleY - 1][castleX - 1] = castle;
 
 
-            while ((personLive > 0) && !(castleX == personX && castleY == personY)) {
-                if (personLive == 0){
-                    System.out.println("Твои жизни иссякли но Всевысший сжалился над тобой, ты сможешь вернуться к игре если решишь задачу");
-                    numF= random.nextInt(500);
-                    numS= random.nextInt(500);
-                    int Trueanswer = numF + numS;
-                    System.out.println("Чему равно" + numF + " + " + numS );
-                    int ansplayer = scanner.nextInt();
-                    if (Trueanswer == ansplayer) {
-                        System.out.println("Всевысший дарует тебе второй шанс");
-                    }else {
-                        System.out.println("ТЫ УМЕР");
-                        personLive -= 1;
-                        System.out.println("Здровье = " + personLive);
-                    }
-                }
+            while ((personLive >= 0) && !(castleX == personX && castleY == personY)) {
+
 
                 board[personY - 1][personX - 1] = person;
-                for (int y = 1; y <= sizeBoard; y++) {
-                    System.out.println(wall);
-                    for (int x = 1; x <= sizeBoard; x++) {
-                        System.out.print(leftBlock);
-                        System.out.print(board[y - 1][x - 1]);
-                    }
-                    System.out.println(rightBlock);
-                }
-                System.out.println(wall);
+                outputBoard(board, personLive, sizeBoard, leftBlock, rightBlock, wall);
 
                 System.out.println("Введите куда будет ходить персонаж(ход возможен только по вертикали и горизонтали на одну клетку;");
                 System.out.println(" Координаты персонажа - (x: " + personX + ", y: " + personY + "))");
@@ -114,7 +104,7 @@ public class Game {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
 
-                System.out.println("ход не коректен");
+                //System.out.println("ход не коректен");
                 if ((x == personX && Math.abs(y - personY) == 1) || (y == personY && Math.abs(x - personX) == 1) && (x < 6 && x > 0) && (y < 6 && y > 0)) {
                     if (board[y - 1][x - 1].equals("  ")) {
                         board[personY - 1][personX - 1] = "  ";
@@ -137,8 +127,22 @@ public class Game {
                         }
                     }
                 }
-
-                System.out.println("не корректный ");
+                //System.out.println("не корректный ");
+                if (personLive == 0){
+                    System.out.println("Твои жизни иссякли но Всевысший сжалился над тобой, ты сможешь вернуться к игре если решишь задачу");
+                    numF= random.nextInt(500);
+                    numS= random.nextInt(500);
+                    int Trueanswer = numF + numS;
+                    System.out.println("Чему равно" + numF + " + " + numS );
+                    int ansplayer = scanner.nextInt();
+                    if (Trueanswer == ansplayer) {
+                        System.out.println("Всевысший дарует тебе второй шанс");
+                    }else {
+                        System.out.println("ТЫ УМЕР");
+                        personLive -= 1;
+                        System.out.println("Здровье = " + personLive);
+                    }
+                }
             }
 
 
@@ -152,26 +156,23 @@ public class Game {
             // второй блок
             System.out.println("Почему ты не хочешь со мной поиграть?");
         } else {
-            System.out.println("Есть всего два ответа");
+            //System.out.println("Есть всего два ответа");
 
         }
 
 
     }
-    static void outputBoard(String[][] board, int live) {
-        String leftBlock = "| ";
-        String rightBlock = "|";
-        String wall = "+ —— + —— + —— + —— + —— +";
-
-        for (String[] raw : board) {
+    static void outputBoard(String[][] board, int personLive, int sizeBoard, String leftBlock, String rightBlock,String wall) {
+        for (int y = 1; y <= sizeBoard; y++) {
             System.out.println(wall);
-            for (String col : raw) {
-                System.out.print(leftBlock + col + " ");
+            for (int x = 1; x <= sizeBoard; x++) {
+                System.out.print(leftBlock);
+                System.out.print(board[y - 1][x - 1]);
             }
             System.out.println(rightBlock);
         }
         System.out.println(wall);
 
-        System.out.println("Live:\\t" + live + "\\n");
+        System.out.println("Жизни: " + + personLive);
     }
 }
