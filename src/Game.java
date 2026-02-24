@@ -9,25 +9,27 @@ public class Game {
                 Random random = new Random();
                 int x = random.nextInt(100);
                 int y = random.nextInt(100);
-                System.out.println("Чему равно" + x + " + " +  y);
+                System.out.println("Чему равно" + x + " + " + y);
                 if (x + y == scanner.nextInt()) {
                     System.out.println("Поздравляю ответ правильный");
                     return true;
-                }else {
+                } else {
                     System.out.println("К сожалению ты проиграл схватку");
                     return false;
                 }
+            case (2):
                 break;
-                case (2):
-                    break;
-                    case (3):
-                        break;
-                        case (4):
-                            break;
-                            case (5):
-                                break;
+            case (3):
+                break;
+            case (4):
+                break;
+            case (5):
+                break;
         }
+        return  false;
+
     }
+
     public static void main(String[] args) {
         Random random = new Random();
 
@@ -118,7 +120,7 @@ public class Game {
                         break;
                     } else {
                         System.out.println("Тебе нужно решить задачку!!!");
-                        if (taskMonster()) {
+                        if (taskMonster(difficultGame)) {
                             board[personY - 1][personX - 1] = "  ";
                             personX = x;
                             personY = y;
@@ -128,16 +130,16 @@ public class Game {
                     }
                 }
                 //System.out.println("не корректный ");
-                if (personLive == 0){
+                if (personLive == 0) {
                     System.out.println("Твои жизни иссякли но Всевысший сжалился над тобой, ты сможешь вернуться к игре если решишь задачу");
-                    numF= random.nextInt(500);
-                    numS= random.nextInt(500);
+                    numF = random.nextInt(500);
+                    numS = random.nextInt(500);
                     int Trueanswer = numF + numS;
-                    System.out.println("Чему равно" + numF + " + " + numS );
+                    System.out.println("Чему равно" + numF + " + " + numS);
                     int ansplayer = scanner.nextInt();
                     if (Trueanswer == ansplayer) {
                         System.out.println("Всевысший дарует тебе второй шанс");
-                    }else {
+                    } else {
                         System.out.println("ТЫ УМЕР");
                         personLive -= 1;
                         System.out.println("Здровье = " + personLive);
@@ -147,12 +149,9 @@ public class Game {
 
 
         }
-        if (personLive < 0){
+        if (personLive < 0) {
             System.out.println("Поздравляю ты сдох!");
-        }
-
-
-        else if (answer.equalsIgnoreCase("НЕТ")) {
+        } else if (answer.equalsIgnoreCase("НЕТ")) {
             // второй блок
             System.out.println("Почему ты не хочешь со мной поиграть?");
         } else {
@@ -162,7 +161,8 @@ public class Game {
 
 
     }
-    static void outputBoard(String[][] board, int personLive, int sizeBoard, String leftBlock, String rightBlock,String wall) {
+
+    static void outputBoard(String[][] board, int personLive, int sizeBoard, String leftBlock, String rightBlock, String wall) {
         for (int y = 1; y <= sizeBoard; y++) {
             System.out.println(wall);
             for (int x = 1; x <= sizeBoard; x++) {
@@ -173,6 +173,6 @@ public class Game {
         }
         System.out.println(wall);
 
-        System.out.println("Жизни: " + + personLive);
+        System.out.println("Жизни: " + +personLive);
     }
 }
