@@ -5,6 +5,10 @@ public class Game {
     static boolean taskMonster(int difficultGame) {
         switch (difficultGame) {
             case (1):
+            case (2):
+            case (3):
+            case (4):
+            case (5):
                 Scanner scanner = new Scanner(System.in, "UTF-8");
                 Random random = new Random();
                 int x = random.nextInt(100);
@@ -17,14 +21,6 @@ public class Game {
                     System.out.println("К сожалению ты проиграл схватку");
                     return false;
                 }
-            case (2):
-                break;
-            case (3):
-                break;
-            case (4):
-                break;
-            case (5):
-                break;
         }
         return  false;
 
@@ -105,9 +101,10 @@ public class Game {
 
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
+                Person personcl = new Person();
 
                 //System.out.println("ход не коректен");
-                if ((x == personX && Math.abs(y - personY) == 1) || (y == personY && Math.abs(x - personX) == 1) && (x < 6 && x > 0) && (y < 6 && y > 0)) {
+                if (personcl.MoveCorrect(x,y)) {
                     if (board[y - 1][x - 1].equals("  ")) {
                         board[personY - 1][personX - 1] = "  ";
                         personX = x;
