@@ -66,6 +66,16 @@ public class Game {
                 board[random.nextInt(sizeBoard - 1)][random.nextInt(sizeBoard)] = monster;
             }
             board[castleY - 1][castleX - 1] = castle;
+            int count_monster = sizeBoard * sizeBoard - sizeBoard - 5;
+            Monster[] arrMonster = new Monster[count_monster + 1];
+            int count = 0;
+            Monster test;
+            while (count <= count_monster){
+                test = new Monster(sizeBoard);
+                if (board[test.getY()][test.getX()].equals("  ")){
+                    board[test.getY()][test.getX()] = test.getImage();
+                    arrMonster[count] = test;
+                    count++;
 
 
             while ((personLive >= 0) && !(castleX == person.getX() && castleY == person.getY())) {
