@@ -80,8 +80,6 @@ public class Game {
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
 
-                Taskmonster taskmonster = new Taskmonster();
-
                 //System.out.println("ход не коректен");
                 //x == personX && Math.abs(y - personY) == 1) || (y == personY && Math.abs(x - personX) == 1) && (x < 6 && x > 0) && (y < 6 && y > 0
                 if (person.moveCorrect(x, y)) {
@@ -95,8 +93,20 @@ public class Game {
                         System.out.println("Вы прошли игру!!!");
                         break;
                     } else {
+                        for (Monster monster : arrMonster) {
+                            if (monster.conflictPerson(x, y)) {
+                                if (monster.taskMonster(difficultGame)) {
+                                    board[person.getY() - 1][person.getX() - 1] = "  ";
+                                    person.move(x, y);
+
+                                } else {
+                                    person.downLive();
+                                }
+                                break;
+                            }
                         System.out.println("Тебе нужно решить задачку!!!");
-                        if (Taskmonster.taskMonster(difficultGame)) {
+
+                        if (monster.taskMonster(difficultGame)) {
                             board[person.getY() - 1][person.getX() - 1] = "  ";
                             person.move(x,y);
                         } else {
