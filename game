@@ -705,3 +705,25 @@ public class Monster {
         return false;
     }
 }
+
+
+
+boolean monsterDefeated = false;
+                        for (Monster monster : arrMonster) {
+                            if (monster.conflictPerson(x, y)) {
+                                if (monster.taskMonster(difficultGame)) {
+                                    board[person.getX() - 1][person.getY() - 1] = "  ";
+                                    person.move(x, y);
+
+                                } else {
+                                    person.downLive();
+                                    System.out.println("Жизней осталось: " + personLive);
+                                }
+                                break;
+                            }
+
+
+
+
+
+                        }
