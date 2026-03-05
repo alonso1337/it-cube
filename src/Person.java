@@ -8,7 +8,8 @@ public class Person {
 
     Person(int sizeBoard) {
         y = sizeBoard;
-        x = r.nextInt(sizeBoard);
+        int n = r.nextInt(sizeBoard);
+        x = n == 0 ? 1 : n;
     }
 
     Person(int x, int y){
@@ -51,7 +52,9 @@ public class Person {
         this.y = y;
     }
 
-    public void downLive(){
+    public int downLive(){
+
         live--;
+        return live;
     }
 }
