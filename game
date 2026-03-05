@@ -579,3 +579,129 @@ public class Main {
         System.out.println("Жизни: " + personLive);
     }
 }
+
+
+
+
+
+person
+import java.util.Random;
+
+public class Person {
+    private int x, y;
+    private String image = "Pp";
+    private int live = 3;
+    Random r = new Random();
+
+    Person(int sizeBoard) {
+        this.y = sizeBoard;
+        this.x = 1 + r.nextInt(sizeBoard - 1);
+    }
+
+    Person(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    Person() {
+        this(1, 1);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getLive() {
+        return live;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public boolean moveCorrect(int x, int y) {
+        return (this.x == x && Math.abs(this.y - y) == 1) ||
+                (this.y == y && Math.abs(this.x - x) == 1);
+    }
+
+    void move(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void downLive() {
+        live--;
+    }
+}
+
+
+
+
+monster
+import java.util.Random;
+import java.util.Scanner;
+
+public class Monster {
+    private String image = "Mm";
+    private final int x, y;
+    Random r = new Random();
+
+    Monster(int sizeBoard) {
+        this.y = r.nextInt(sizeBoard);
+        this.x = r.nextInt(sizeBoard);
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public boolean conflictPerson(int perX, int perY) {
+        return perY - 1 == this.y && perX - 1 == this.x;
+    }
+
+    public boolean taskMonster(int difficultGame) {
+        Scanner scanner = new Scanner(System.in, "UTF-8");
+        Random random = new Random();
+        int x, y;
+
+        switch (difficultGame) {
+            case 1:
+            case 2:
+                x = random.nextInt(difficultGame == 1 ? 100 : 200);
+                y = random.nextInt(difficultGame == 1 ? 100 : 200);
+                System.out.println("Чему равно " + x + " + " + y + " = ?");
+                if (x + y == scanner.nextInt()) {
+                    System.out.println("Поздравляю ответ правильный");
+                    return true;
+                }
+                break;
+
+            case 3:
+            case 4:
+            case 5:
+                int max = difficultGame == 3 ? 20 : (difficultGame == 4 ? 35 : 50);
+                x = random.nextInt(max);
+                y = random.nextInt(max);
+                System.out.println("Чему равно " + x + " * " + y + " = ?");
+                if (x * y == scanner.nextInt()) {
+                    System.out.println("Поздравляю ответ правильный");
+                    return true;
+                }
+                break;
+        }
+        System.out.println("К сожалению ты проиграл схватку");
+        return false;
+    }
+}
